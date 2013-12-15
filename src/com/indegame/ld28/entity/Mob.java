@@ -2,13 +2,13 @@ package com.indegame.ld28.entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
+
+import com.indegame.ld28.graphics.Texture;
 
 public class Mob extends Entity {
 	protected boolean up, down, left, right = false;
-	protected BufferedImage texture;
-
-	public Mob(int x, int y, BufferedImage texture) {
+	protected Texture texture;
+	public Mob(int x, int y, Texture texture) {
 		super(x, y);
 		this.texture = texture;
 	}

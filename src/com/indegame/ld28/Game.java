@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import com.indegame.ld28.entity.Control;
+import com.indegame.ld28.graphics.Texture;
 import com.indegame.ld28.input.Keyboard;
 import com.indegame.ld28.input.Mouse;
 import com.indegame.ld28.menu.Button;
@@ -42,7 +43,7 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 		frame = new JFrame(TITLE);
 		control = new Control();
-		menu = new Menu(control.tex.mainmenubanner);
+		menu = new Menu(Texture.mainmenubanner);
 
 		Keyboard key = new Keyboard();
 		addKeyListener(key);
@@ -111,7 +112,7 @@ public class Game extends Canvas implements Runnable {
 	public void update() {
 		if (state == State.MENU) {
 			if (playmusic) {
-				Sound.mainmusic.play();
+				Sound.mainmusic.loop();
 				playmusic = false;
 			}
 		}
@@ -137,7 +138,7 @@ public class Game extends Canvas implements Runnable {
 		// /////////////////////////////////
 
 		g.drawImage(buffer, 0, 0, getWidth(), getHeight(), null);
-		g.drawImage(control.tex.background, 0, 0, null);
+		g.drawImage(Texture.background.render(), 0, 0, null);
 		if (state == State.MENU) {
 			menu.render(g);
 		} else if (state == State.GAME) {

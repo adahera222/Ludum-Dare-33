@@ -20,5 +20,8 @@ public class Sound {
 
 	public void play() {
 		sound.play();
+	} 
+	public void loop() {
+		sound.loop();
 	}
 }

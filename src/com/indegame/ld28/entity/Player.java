@@ -1,11 +1,12 @@
 package com.indegame.ld28.entity;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+
+import com.indegame.ld28.graphics.Texture;
 
 public class Player extends Mob {
 
-	public Player(int x, int y, BufferedImage texture) {
+	public Player(int x, int y, Texture texture) {
 		super(x, y, texture);
 	}
 
@@ -22,7 +23,7 @@ public class Player extends Mob {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(texture, x, y, null);
+		g.drawImage(texture.render(), x, y, null);
 	}
 
 }

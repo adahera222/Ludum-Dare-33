@@ -9,7 +9,7 @@ public class Entity {
 	}
 
 	public void update() {
-
+		
 	}
 
 	public int getX() {

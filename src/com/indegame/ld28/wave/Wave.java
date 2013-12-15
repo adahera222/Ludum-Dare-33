@@ -1,6 +1,5 @@
 package com.indegame.ld28.wave;
 
-import java.awt.image.BufferedImage;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,7 +8,7 @@ import com.indegame.ld28.Game;
 import com.indegame.ld28.entity.Control;
 import com.indegame.ld28.entity.FEnemy;
 import com.indegame.ld28.entity.REnemy;
-import com.indegame.ld28.graphics.Textures;
+import com.indegame.ld28.graphics.Texture;
 import com.indegame.ld28.input.Mouse;
 
 public class Wave {
@@ -17,7 +16,7 @@ public class Wave {
 	public static int REAL_ENEMY_COUNT = 1;
 	public static int FAKE_ENEMY_COUNT = 2;
 
-	public static void spawnWave(final Control c, final Textures tex) {
+	public static void spawnWave(final Control c) {
 		System.out.println("Wave.spawnWave()");
 		Timer time = new Timer();
 		time.schedule(new TimerTask() {
@@ -27,7 +26,7 @@ public class Wave {
 				WAVE_COUNT++;
 				Random rand = new Random();
 				int rEnemyPos = rand.nextInt(3) + 1;
-				BufferedImage enemy = tex.enemy;
+				Texture enemy = Texture.enemy;
 				System.out.println("Random number is: " + rEnemyPos);
 				if (rEnemyPos == 1) {
 					c.addMob(new REnemy(Game.WIDTH, Game.HEIGHT / 6, enemy));

@@ -4,20 +4,18 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import com.indegame.ld28.Game;
-import com.indegame.ld28.graphics.Textures;
+import com.indegame.ld28.graphics.Texture;
 import com.indegame.ld28.sound.Sound;
 import com.indegame.ld28.state.State;
 import com.indegame.ld28.wave.Wave;
 
 public class Control {
-	public Textures tex;
 	public static Player player;
 
 	private LinkedList<Mob> mobs = new LinkedList<Mob>();
 
 	public Control() {
-		tex = new Textures();
-		player = new Player(10, 80, tex.player);
+		player = new Player(10, 80, Texture.player);
 	}
 
 	public void addMob(Mob mob) {
@@ -29,6 +27,21 @@ public class Control {
 	}
 
 	public void update() {
+		for(int i = 0; i < mobs.size(); i++) {
+			Mob m = mobs.get(i);
+			if(m instanceof REnemy || m instanceof FEnemy) {
+				if(m.getX() <= 0) {
+					removeMob(m);
+					clearMobs();
+					Game.state = State.END;
+				}
+			}
+			if(m instanceof Projectile) {
+				if(m.getX() >= Game.WIDTH) {
+					removeMob(m);
+				}
+			}
+		}
 		for (int i = 0; i < mobs.size(); i++) {
 			Mob m = mobs.get(i);
 
@@ -61,7 +74,7 @@ public class Control {
 							System.out.println("Control.collision()");
 							if(a instanceof FEnemy) {
 								removeMob(a);
-								removeMob(m);
+								mobs.remove(m);
 								Sound.lose.play();
 								clearMobs();
 								Game.state = State.END;
@@ -69,7 +82,7 @@ public class Control {
 							else if (a instanceof REnemy) {
 								Sound.win.play();
 								clearMobs();
-								Wave.spawnWave(this, tex);
+								Wave.spawnWave(this);
 							}
 						}
 					}

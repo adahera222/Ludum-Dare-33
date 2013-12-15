@@ -2,14 +2,15 @@ package com.indegame.ld28.menu;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+import com.indegame.ld28.graphics.Texture;
+
 public class Menu {
-	public BufferedImage banner;
+	public Texture banner;
 	public LinkedList<Button> buttons = new LinkedList<Button>();
 
-	public Menu(BufferedImage banner) {
+	public Menu(Texture banner) {
 		this.banner = banner;
 		addComponents();
 	}
@@ -26,6 +27,6 @@ public class Menu {
 		for (Button b : buttons) {
 			b.render(g);
 		}
-		g.drawImage(banner, 100, 50, null);
+		g.drawImage(banner.render(), 100, 50, null);
 	}
 }

@@ -3,13 +3,13 @@ package com.indegame.ld28.input;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.indegame.ld28.Game;
 import com.indegame.ld28.entity.Control;
 import com.indegame.ld28.entity.Projectile;
+import com.indegame.ld28.graphics.Texture;
 import com.indegame.ld28.sound.Sound;
 import com.indegame.ld28.state.State;
 import com.indegame.ld28.wave.Wave;
@@ -19,12 +19,24 @@ public class Mouse implements MouseListener {
 	static boolean fireEnabled = false;
 
 	public void mouseClicked(MouseEvent e) {
+	
+	}
+
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	public void mousePressed(MouseEvent e) {
 		if (Game.state == State.MENU) {
 			Point m = new Point(e.getX(), e.getY());
 			if (Game.menu.buttons.get(0).contains(m)) {
 				Sound.select.play();
 				Game.state = State.GAME;
-				Wave.spawnWave(Game.control, Game.control.tex);
+				Wave.spawnWave(Game.control);
 			}
 		}
 		if (Game.state == State.GAME) {
@@ -41,7 +53,7 @@ public class Mouse implements MouseListener {
 			Sound.shoot.play();
 			int x = Control.player.getX();
 			int y = Control.player.getY();
-			BufferedImage texture = Game.control.tex.bullet;
+			Texture texture = Texture.bullet;
 			Game.control.addMob(new Projectile(x, y, texture));
 			fired = true;
 		}
@@ -53,18 +65,6 @@ public class Mouse implements MouseListener {
 			}
 			
 		}
-	}
-
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-	public void mousePressed(MouseEvent e) {
-
 	}
 
 	public void mouseReleased(MouseEvent e) {
